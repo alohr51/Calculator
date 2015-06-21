@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style type="text/css">
+        button {
+            width: 100%;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h1 align="center">Calculator</h1>
+    <div id="screen" align="right" style="height: 25px;width: 400px;border:1px solid red; margin:0 auto;padding: 4px"></div>
+
+    <table width="410px" border="1px" align="center">
+        <tr>
+            <td bgcolor="#9BCDFF"></td>
+            <td>
+                <button id="CE" onclick="clearScreen()">CE</button>
+            </td>
+            <td>
+                <button id="C" onclick="clearScreen()">C</button>
+            </td>
+            <td>
+                <button id="inverse" onclick="inverse()">+ -</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button id="7" onclick="seven()">7</button>
+            </td>
+            <td>
+                <button id="8" onclick="eight()">8</button>
+            </td>
+            <td>
+                <button id="9" onclick="nine()">9</button>
+            </td>
+            <td>
+                <button id="divide" onclick="divide()">/</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button id="4" onclick="four()">4</button>
+            </td>
+            <td>
+                <button id="5" onclick="five()">5</button>
+            </td>
+            <td>
+                <button id="6" onclick="six()">6</button>
+            </td>
+            <td>
+                <button id="multiply" onclick="multiply()">*</button>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button id="1" onclick="one()">1</button>
+            </td>
+            <td>
+                <button id="2" onclick="two()">2</button>
+            </td>
+            <td>
+                <button id="3" onclick="three()">3</button>
+            </td>
+            <td>
+                <button id="subract" onclick="subtract()">-</button>
+            </td>
+        </tr>
+        <tr>
+            <td width:>
+                <button id="0" onclick="zero()">0</button>
+            </td>
+            <td><button id="decimal" onclick="decimal()">.</button></td>
+            <td>
+            <button id="equals" onclick="equals()">=</button></td>
+            </td>
+            <td>
+                <button id="add" onclick="add()">+</button>
+            </td>
+        </tr>
+        </TR>
+    </table>
+
+</body>
+
+<script>
+    //globals
+    var num1;
+    var num2;
+    var operation;
+
+    function clearScreen() {
+        var screen = document.getElementById("screen");
+        screen.innerHTML = "";
+    }
+
+    function zero() {
+        var screen = document.getElementById("screen");
+        screen.innerHTML = screen.innerHTML + "0";
+    }
+
+    function one() {
+        var screen = document.getElementById("screen");
+        screen.innerHTML = screen.innerHTML + "1";
+    }
+
+    function two() {
+        var screen = document.getElementById("screen");
+        screen.innerHTML = screen.innerHTML + "2";
+    }
+
+    function three() {
+        var screen = document.getElementById("screen");
+        screen.innerHTML = screen.innerHTML + "3";
+    }
+
+    function four() {
+        var screen = document.getElementById("screen");
+        screen.innerHTML = screen.innerHTML + "4";
+    }
+
+    function five() {
+        var screen = document.getElementById("screen");
+        screen.innerHTML = screen.innerHTML + "5";
+    }
+
+    function six() {
+        var screen = document.getElementById("screen");
+        screen.innerHTML = screen.innerHTML + "6";
+    }
+
+    function seven() {
+        var screen = document.getElementById("screen");
+        screen.innerHTML = screen.innerHTML + "7";
+    }
+
+    function eight() {
+        var screen = document.getElementById("screen");
+        screen.innerHTML = screen.innerHTML + "8";
+    }
+
+    function nine() {
+        var screen = document.getElementById("screen");
+        screen.innerHTML = screen.innerHTML + "9";
+    }
+	
+    function decimal() {
+        var textNum1 = document.getElementById("screen").innerHTML;
+        document.getElementById("screen").innerHTML = textNum1 + ".";
+    }
+
+    function inverse() {
+        var textNum = document.getElementById("screen").innerHTML;
+        var number = parseInt(textNum, 10);
+        //if number is negative
+        if (number < 0) {
+            //get the absolute value of the number
+            var positiveNum = Math.abs(number);
+            //update the screen
+            document.getElementById("screen").innerHTML = positiveNum;
+            num1 = positiveNum;
+        }
+        //else number is positive
+        else {
+            document.getElementById("screen").innerHTML = "-" + textNum;
+            var negativeText = document.getElementById("screen").innerHTML;
+            var negativeNum = parseInt(negativeText, 10);
+            num1 = negativeNum;
+        }
+    }
+
+    function isInt(num) {
+        if (Math.round(num) === num) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    //add subtract multiply and divide use the equals function to dictate the final answer
+    function add() {
+        var textNum1 = document.getElementById("screen").innerHTML;
+        if (isInt(num1)) {
+            num1 = parseInt(textNum1, 10);
+        } else {
+            num1 = parseFloat(textNum1, 10);
+        }
+        operation = "add";
+        //clears the screen to make room for the second number
+        clearScreen();
+    }
+
+    function subtract() {
+        var textNum1 = document.getElementById("screen").innerHTML;
+        if (isInt(num1)) {
+            num1 = parseInt(textNum1, 10);
+        } else {
+            num1 = parseFloat(textNum1, 10);
+        }
+        operation = "subtract";
+        clearScreen();
+    }
+
+    function multiply() {
+        var textNum1 = document.getElementById("screen").innerHTML;
+        if (isInt(num1)) {
+            num1 = parseInt(textNum1, 10);
+        } else {
+            num1 = parseFloat(textNum1, 10);
+        }
+        operation = "multiply";
+        clearScreen();
+    }
+
+    function divide() {
+        var textNum1 = document.getElementById("screen").innerHTML;
+        if (isInt(num1)) {
+            num1 = parseInt(textNum1, 10);
+        } else {
+            num1 = parseFloat(textNum1, 10);
+        }
+        operation = "divide";
+        clearScreen();
+    }
+    function equals() {
+        var textNum2 = document.getElementById("screen").innerHTML;
+        if (isInt(num2)) {
+            num2 = parseInt(textNum2, 10);
+        } else {
+            num2 = parseFloat(textNum2, 10);
+        }
+        switch (operation) {
+        case "add":
+            document.getElementById("screen").innerHTML = num1 + num2;
+            break;
+        case "subtract":
+            document.getElementById("screen").innerHTML = num1 - num2;
+            break;
+        case "divide":
+            document.getElementById("screen").innerHTML = num1 / num2;
+            break;
+        case "multiply":
+            document.getElementById("screen").innerHTML = num1 * num2;
+            break;
+        default:
+            document.getElementById("screen").innerHTML = num1;
+            break;
+        }
+    }
+</script>
+
+</html>
